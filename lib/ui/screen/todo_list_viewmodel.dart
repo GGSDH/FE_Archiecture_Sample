@@ -23,4 +23,19 @@ class TodoListViewModel extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+
+  Future<void> deleteTodo({
+    required String id,
+  }) async {
+    _isLoading = true;
+    notifyListeners();
+
+    await todoRepository.deleteTodo(
+      id: id
+    );
+    _items = _items.where((item) => item.id != id).toList();
+
+    _isLoading = false;
+    notifyListeners();
+  }
 }

@@ -67,13 +67,46 @@ class _TodoListState extends State<TodoList> {
 
         return ListView.builder(
           itemCount: itemCount,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(items[index].content),
-            );
-          },
+          itemBuilder: (context, index) => Dismissible(
+            key: ValueKey(items[index].id),
+            background: Container(
+              color: Theme.of(context).colorScheme.onErrorContainer.withOpacity(0.75),
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.only(right: 20),
+              child: const Icon(Icons.delete, color: Colors.white, size: 40)
+            ),
+            onDismissed: (direction) {
+              viewModel.deleteTodo(id: items[index].id);
+            },
+            child: TodoItem(content: items[index].content)
+          )
         );
       }
+    );
+  }
+}
+
+class TodoItem extends StatelessWidget {
+  final String content;
+
+  const TodoItem({required this.content, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16
+          ),
+          child: Text(
+            content,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
+      ),
     );
   }
 }

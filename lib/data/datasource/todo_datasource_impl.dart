@@ -21,4 +21,13 @@ class TodoDataSourceImpl extends TodoDataSource {
       content: content
     );
   }
+
+  @override
+  Future<Response> deleteTodo({
+    required String id
+  }) {
+    return dioClient.deleteTodo(
+      id: id
+    );
+  }
 }

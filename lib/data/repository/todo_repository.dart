@@ -7,4 +7,7 @@ abstract class TodoRepository {
   Future<Response> addTodo({
     required String content,
   });
+  Future<Response> deleteTodo({
+    required String id,
+  });
 }

@@ -21,4 +21,13 @@ class TodoRepositoryImpl extends TodoRepository {
       content: content
     );
   }
+
+  @override
+  Future<Response> deleteTodo({
+    required String id
+  }) {
+    return todoDataSource.deleteTodo(
+      id: id
+    );
+  }
 }
